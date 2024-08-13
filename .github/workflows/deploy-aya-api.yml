@@ -1,0 +1,28 @@
+name: Deploy Aya API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: debian-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        # Add any required dependencies here, if needed
+
+    - name: Run aya.py as an API
+      run: |
+        nohup python aya.py &
